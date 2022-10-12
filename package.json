@@ -1,0 +1,12 @@
+{
+  "name": "node-js-course",
+  "version": "1.0.0",
+  "description": "Node JS Course",
+  "main": "index.js",
+  "repository": "https://github.com/zelitosaide/node-js-course.git",
+  "author": "zelitosaide <zelitosaide83@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
