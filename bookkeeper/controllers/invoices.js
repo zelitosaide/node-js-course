@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { Invoice } from "../models/invoice.js";
 
 export async function get(req, res) {
-  const { page = 1, limit = 5 } = req.query;
+  const { page, limit } = req.query;
   const start = (Number(page) - 1) * Number(limit);
   const end = Number(page) * Number(limit);
 
@@ -11,12 +11,14 @@ export async function get(req, res) {
     const total = await Invoice.countDocuments();
     const invoices = await Invoice.find().limit(Number(limit)).skip(start);
     res.status(200).json({
-      current: Number(page),
-      ...(end < total && { next: Number(page) + 1 }),
-      ...((start && end < total) && { previous: Number(page) - 1 }),
-      limit: limit,
-      total: total,
       items: invoices,
+      pageInfo: {
+        resultsPerPage: Number(limit),
+        totalResults: total,
+        currentPage: Number(page),
+        ...(end < total && { nextPage: Number(page) + 1 }),
+        ...((start && (end < total)) && { previousPage: Number(page) - 1 }),
+      }
     });
   } catch (error) {
     res.status(409).json({ message: error.message });
