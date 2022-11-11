@@ -16,7 +16,7 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 // const CONNECTION_URL = process.env.CONNECTION_URL;
 
-app.use("/invoices", invoices);
+// app.use("/invoices", invoices);
 
 app.get("/", function (_, res) {
   res.send("--- Welcome to Bookkeeper API :) ---");
