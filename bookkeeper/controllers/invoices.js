@@ -7,16 +7,14 @@ export async function get(req, res) {
   const start = (Number(page) - 1) * Number(limit);
   const end = Number(page) * Number(limit);
 
-  console.log("favorite", favorite);
-
   let invoices, total;
 
   try {
-    if (favorite) {
-      total = await Invoice.countDocuments({ favorite: favorite === "true" });
-    } else {
-      total = await Invoice.countDocuments();
-    }
+    // if (favorite) {
+    //   total = await Invoice.countDocuments({ favorite: favorite === "true" });
+    // } else {
+    //   total = await Invoice.countDocuments();
+    // }
 
     if (search) {
       const name = new RegExp(search, "i");
@@ -32,6 +30,13 @@ export async function get(req, res) {
       } else {
         invoices = await Invoice.find().limit(Number(limit)).skip(start);
       }
+
+      if (favorite) {
+        total = await Invoice.countDocuments({ favorite: favorite === "true" });
+      } else {
+        total = await Invoice.countDocuments();
+      }
+
       return res.status(200).json({
         items: invoices,
         pageInfo: {
