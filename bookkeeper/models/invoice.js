@@ -4,6 +4,10 @@ const invoiceSchema = mongoose.Schema({
   name: String,
   number: Number,
   amount: String,
+  favorite: {
+    type: Boolean,
+    default: true
+  },
   due: {
     type: Date,
     default: new Date().toISOString()

@@ -7,6 +7,10 @@
   "author": "zelitosaide <zelitosaide83@gmail.com>",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
