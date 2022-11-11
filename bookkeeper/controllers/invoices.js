@@ -31,17 +31,18 @@ export async function get(req, res) {
         invoices = await Invoice.find().limit(Number(limit)).skip(start);
       }
 
-      if (favorite) {
-        total = await Invoice.countDocuments({ favorite: favorite === "true" });
-      } else {
-        total = await Invoice.countDocuments();
-      }
+      // if (favorite) {
+      //   total = await Invoice.countDocuments({ favorite: favorite === "true" });
+      // } else {
+      //   total = await Invoice.countDocuments();
+      // }
 
       return res.status(200).json({
         items: invoices,
         pageInfo: {
           resultsPerPage: Number(limit),
-          totalResults: total,
+          // totalResults: total,
+          totalResults: 10,
           currentPage: Number(page),
           ...(end < total && { nextPage: Number(page) + 1 }),
           ...(start && end < total && { previousPage: Number(page) - 1 }),
