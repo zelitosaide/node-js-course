@@ -30,23 +30,15 @@ export async function get(req, res) {
       } else {
         invoices = await Invoice.find().limit(Number(limit)).skip(start);
       }
-
-      // if (favorite) {
-      //   total = await Invoice.countDocuments({ favorite: favorite === "true" });
-      // } else {
-      //   total = await Invoice.countDocuments();
-      // }
-
       return res.status(200).json({
         items: invoices,
-        pageInfo: {
-          resultsPerPage: Number(limit),
-          // totalResults: total,
-          totalResults: 10,
-          currentPage: Number(page),
-          ...(end < total && { nextPage: Number(page) + 1 }),
-          ...(start && end < total && { previousPage: Number(page) - 1 }),
-        },
+        // pageInfo: {
+        //   resultsPerPage: Number(limit),
+        //   totalResults: total,
+        //   currentPage: Number(page),
+        //   ...(end < total && { nextPage: Number(page) + 1 }),
+        //   ...(start && end < total && { previousPage: Number(page) - 1 }),
+        // },
       });
     }
   } catch (error) {
