@@ -14,7 +14,7 @@ dotenv.config();
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;
-// const CONNECTION_URL = process.env.CONNECTION_URL;
+const CONNECTION_URL = process.env.CONNECTION_URL;
 
 app.use("/invoices", invoices);
 
@@ -26,13 +26,13 @@ app.listen(PORT, function () {
   console.log(`Server running on port: ${PORT}`);
 });
 
-// mongoose
-//   .connect(CONNECTION_URL)
-//   .then(function () {
-//     app.listen(PORT, function () {
-//       console.log(`Server running on port: ${PORT}`);
-//     });
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
+mongoose
+  .connect(CONNECTION_URL)
+  .then(function () {
+    app.listen(PORT, function () {
+      console.log(`Server running on port: ${PORT}`);
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
