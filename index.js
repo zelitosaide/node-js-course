@@ -19,11 +19,7 @@ const CONNECTION_URL = process.env.CONNECTION_URL;
 app.use("/invoices", invoices);
 
 app.get("/", function (_, res) {
-  res.send("--- Welcome to Bookkeeper API :) ---");
-});
-
-app.listen(PORT, function () {
-  console.log(`Server running on port: ${PORT}`);
+  res.send("--- Welcome to Bookkeeper API :) --- Zelito");
 });
 
 mongoose

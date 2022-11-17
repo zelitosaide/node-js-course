@@ -4,16 +4,20 @@ const invoiceSchema = mongoose.Schema({
   name: String,
   number: Number,
   amount: String,
+  count: {
+    type: Number,
+    default: 0,
+  },
   favorite: {
     type: Boolean,
-    default: true
+    default: true,
   },
   due: {
     type: Date,
-    default: new Date().toISOString()
+    default: new Date().toISOString(),
   },
 });
 
-const Invoice = mongoose.model('Invoice', invoiceSchema);
+const Invoice = mongoose.model("Invoice", invoiceSchema);
 
 export { Invoice };

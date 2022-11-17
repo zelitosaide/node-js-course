@@ -3,72 +3,48 @@ import mongoose from "mongoose";
 import { Invoice } from "../models/invoice.js";
 
 export async function get(req, res) {
-  let { page = 1, limit = 5 } = req.query;
+  let { page = 1, limit = 5, search, favorite } = req.query;
   const start = (Number(page) - 1) * Number(limit);
   const end = Number(page) * Number(limit);
 
   let invoices, total;
 
   try {
-    invoices = await Invoice.find().limit(Number(limit)).skip(start);
-    return res.status(200).json({
-      items: invoices,
-      pageInfo: {
-        resultsPerPage: Number(limit),
-        totalResults: total,
-        currentPage: Number(page),
-        ...(end < total && { nextPage: Number(page) + 1 }),
-        ...(start && end < total && { previousPage: Number(page) - 1 }),
-      },
-    });
+    if (favorite) {
+      total = await Invoice.countDocuments({ favorite: favorite === "true" });
+    } else {
+      total = await Invoice.countDocuments();
+    }
+
+    if (search) {
+      const name = new RegExp(search, "i");
+      invoices = await Invoice.find({ name: name });
+      return res.status(200).json({
+        items: invoices,
+      });
+    } else {
+      if (favorite) {
+        invoices = await Invoice.find({ favorite: favorite === "true" })
+          .limit(Number(limit))
+          .skip(start);
+      } else {
+        invoices = await Invoice.find().limit(Number(limit)).skip(start);
+      }
+      return res.status(200).json({
+        items: invoices,
+        pageInfo: {
+          resultsPerPage: Number(limit),
+          totalResults: total,
+          currentPage: Number(page),
+          ...(end < total && { nextPage: Number(page) + 1 }),
+          ...(start && end < total && { previousPage: Number(page) - 1 }),
+        },
+      });
+    }
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
 }
-
-// export async function get(req, res) {
-//   let { page = 1, limit = 5, search, favorite } = req.query;
-//   const start = (Number(page) - 1) * Number(limit);
-//   const end = Number(page) * Number(limit);
-
-//   let invoices, total;
-
-//   try {
-//     if (favorite) {
-//       total = await Invoice.countDocuments({ favorite: favorite === "true" });
-//     } else {
-//       total = await Invoice.countDocuments();
-//     }
-
-//     if (search) {
-//       const name = new RegExp(search, "i");
-//       invoices = await Invoice.find({ name: name });
-//       return res.status(200).json({
-//         items: invoices,
-//       });
-//     } else {
-//       if (favorite) {
-//         invoices = await Invoice.find({ favorite: favorite === "true" })
-//           .limit(Number(limit))
-//           .skip(start);
-//       } else {
-//         invoices = await Invoice.find().limit(Number(limit)).skip(start);
-//       }
-//       return res.status(200).json({
-//         items: invoices,
-//         pageInfo: {
-//           resultsPerPage: Number(limit),
-//           totalResults: total,
-//           currentPage: Number(page),
-//           ...(end < total && { nextPage: Number(page) + 1 }),
-//           ...(start && end < total && { previousPage: Number(page) - 1 }),
-//         },
-//       });
-//     }
-//   } catch (error) {
-//     res.status(409).json({ message: error.message });
-//   }
-// }
 
 export async function create(req, res) {
   try {
