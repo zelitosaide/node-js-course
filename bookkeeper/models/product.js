@@ -5,6 +5,12 @@ const productSchema = mongoose.Schema({
   category: String,
   imageUrl: String,
   price: Number,
+  flag: {
+    type: Object,
+    default: {
+      createdByAdmin: true,
+    },
+  },
   createdAt: {
     type: Date,
     default: new Date().toISOString(),
