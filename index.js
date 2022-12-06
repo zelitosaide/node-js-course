@@ -7,7 +7,9 @@ import bodyParser from "body-parser";
 import { router as invoices } from "./bookkeeper/routes/invoices.js";
 import { router as products } from "./bookkeeper/routes/products.js";
 import { router as boxes } from "./bookkeeper/routes/boxes.js";
+import { router as recipes } from "./bookkeeper/routes/recipes.js";
 import { router as boxItems } from "./bookkeeper/routes/boxItems.js";
+import { router as recipeItems } from "./bookkeeper/routes/recipeItems.js";
 
 const app = express();
 
@@ -23,6 +25,8 @@ app.use("/invoices", invoices);
 app.use("/products", products);
 app.use("/boxes", boxes);
 app.use("/boxItems", boxItems);
+app.use("/recipes", recipes);
+app.use("/recipeItems", recipeItems);
 
 app.get("/", function (_, res) {
   res.send("--- Welcome to Bookkeeper API :) --- Zelito");
