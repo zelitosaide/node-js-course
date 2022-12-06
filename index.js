@@ -5,6 +5,9 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 import { router as invoices } from "./bookkeeper/routes/invoices.js";
+import { router as products } from "./bookkeeper/routes/products.js";
+import { router as boxes } from "./bookkeeper/routes/boxes.js";
+import { router as boxItems } from "./bookkeeper/routes/boxItems.js";
 
 const app = express();
 
@@ -17,6 +20,9 @@ const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 app.use("/invoices", invoices);
+app.use("/products", products);
+app.use("/boxes", boxes);
+app.use("/boxItems", boxItems);
 
 app.get("/", function (_, res) {
   res.send("--- Welcome to Bookkeeper API :) --- Zelito");
