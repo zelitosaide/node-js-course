@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const RecipeItemsSchema = mongoose.Schema({
-  products: {
+  ingredients: {
     type: Array,
     default: [],
   },

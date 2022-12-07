@@ -9,6 +9,10 @@ const recipeSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  comments: {
+    type: Array,
+    default: [],
+  },
   time: Number,
   authorId: String,
   description: {
