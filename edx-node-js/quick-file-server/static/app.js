@@ -70,13 +70,19 @@ const populateProducts = async (category) => {
   }
 }
 
+const category = document.querySelector('#category')
+
 // document.querySelector("#fetch").addEventListener("click", async () => {
 //   await populateProducts();
 // });
 
-document.querySelector("#fetch").addEventListener("click", async () => {
-  await populateProducts();
-});
+// document.querySelector("#fetch").addEventListener("click", async () => {
+//   await populateProducts();
+// });
+
+category.addEventListener('input', async ({ target }) => {
+  await populateProducts(target.value)
+})
 
 // customElements.define(
 //   "product-item",
@@ -89,13 +95,21 @@ document.querySelector("#fetch").addEventListener("click", async () => {
 //   }
 // );
 
-customElements.define(
-  "product-item",
-  class Item extends HTMLElement {
-    constructor() {
-      super();
-      const itemTmpl = document.querySelector("#item").content;
-      this.attachShadow({ mode: "open" }).appendChild(itemTmpl.cloneNode(true));
-    }
+// customElements.define(
+//   "product-item",
+//   class Item extends HTMLElement {
+//     constructor() {
+//       super();
+//       const itemTmpl = document.querySelector("#item").content;
+//       this.attachShadow({ mode: "open" }).appendChild(itemTmpl.cloneNode(true));
+//     }
+//   }
+// );
+
+customElements.define('product-item', class Item extends HTMLElement {
+  constructor() {
+    super()
+    const itemTmpl = document.querySelector('#item').content
+    this.attachShadow({mode: 'open'}).appendChild(itemTmpl.cloneNode(true))
   }
-);
+})
