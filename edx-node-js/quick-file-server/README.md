@@ -10,4 +10,9 @@ node -e "fs.unlinkSync('server.js')" # remove file
 node -e "fs.mkdirSync('mock-srv')"
 
 npm init fastify
+
+cd routes
+node -e "fs.mkdirSync('confectionery')"
+node -e "fs.mkdirSync('electronics')"
+cd ..
 ```
