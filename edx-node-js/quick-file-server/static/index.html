@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 
 <head>
   <title>My App</title>
@@ -12,6 +12,59 @@
 
 <body>
   <nav><button id="fetch">Fetch Products</button></nav>
+  <hr>
+  <div id="products"></div>
+  <template id="item">
+    <style>
+      details {
+        font-size: 1.5em;
+      }
+
+      summary {
+        cursor: pointer;
+      }
+
+      p {
+        text-indent: 1.5rem;
+      }
+    </style>
+    <details>
+      <summary>
+        <strong>
+          <slot name="name"></slot>
+        </strong> - <em>
+          <slot name="rrp"></slot>
+        </em>
+      </summary>
+      <p>
+        <slot name="info"></slot>
+      </p>
+    </details>
+  </template>
+</body>
+
+</html> -->
+
+<html>
+
+<head>
+  <title>My App</title>
+  <script type="module" src="app.js"></script>
+  <style>
+    body {
+      background: #fad8d8
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <select id="category">
+      <option value="" hidden>Select Category</option>
+      <option value="electronics">Electronics</option>
+      <option value="confectionery">Confectionery</option>
+    </select>
+  </nav>
   <hr>
   <div id="products"></div>
   <template id="item">
