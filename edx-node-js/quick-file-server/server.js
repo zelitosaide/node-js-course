@@ -1,5 +1,5 @@
-"use strict";
-const { createServer } = require("http");
+// "use strict";
+import { createServer } from "http";
 
 const data = JSON.stringify([
   {
