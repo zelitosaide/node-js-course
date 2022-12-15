@@ -10,6 +10,7 @@ import { router as boxes } from "./bookkeeper/routes/boxes.js";
 import { router as recipes } from "./bookkeeper/routes/recipes.js";
 import { router as boxItems } from "./bookkeeper/routes/boxItems.js";
 import { router as recipeItems } from "./bookkeeper/routes/recipeItems.js";
+import { router as productCategories } from "./bookkeeper/routes/productCategories.js";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/boxes", boxes);
 app.use("/boxItems", boxItems);
 app.use("/recipes", recipes);
 app.use("/recipeItems", recipeItems);
+app.use("/productCategories", productCategories);
 
 app.get("/", function (_, res) {
   res.send("--- Welcome to Bookkeeper API :) --- Zelito");

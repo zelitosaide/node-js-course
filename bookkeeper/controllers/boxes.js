@@ -76,7 +76,7 @@ export async function remove(req, res) {
   try {
     const { boxId } = req.params;
     if (!mongoose.Types.ObjectId.isValid(boxId)) {
-      return res.status(404).json({ message: "No Box with that ID" });
+      return res.status(404).json({ message: "No Box with that ID." });
     }
     await Box.findByIdAndRemove(boxId);
     res.json({ _id: boxId });
