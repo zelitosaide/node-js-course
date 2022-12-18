@@ -58,7 +58,7 @@ export async function create(req, res) {
   }
 }
 
-export async function getByProductCategoryId(req, res) {
+export async function getProductCategoryById(req, res) {
   try {
     const { productCategoryId } = req.params;
     const productCategory = await ProductCategory.findById(productCategoryId);
