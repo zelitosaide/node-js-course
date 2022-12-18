@@ -74,18 +74,24 @@ export async function getProductCategoryById(req, res) {
 }
 
 export async function update(req, res) {
-  // try {
-  //   const { productId } = req.params;
-  //   if (!mongoose.Types.ObjectId.isValid(productId)) {
-  //     return res.status(404).json({ message: "No Product with that ID" });
-  //   }
-  //   const product = await Product.findByIdAndUpdate(productId, req.body, {
-  //     new: true,
-  //   });
-  //   res.status(200).json(product);
-  // } catch (error) {
-  //   res.status(409).json({ message: error.message });
-  // }
+  try {
+    const { productCategoryId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(productCategoryId)) {
+      return res
+        .status(404)
+        .json({ message: "No ProductCategory with that ID" });
+    }
+    const productCategory = await ProductCategory.findByIdAndUpdate(
+      productCategoryId,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(productCategory);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 }
 
 export async function remove(req, res) {
