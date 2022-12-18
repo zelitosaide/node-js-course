@@ -59,16 +59,18 @@ export async function create(req, res) {
 }
 
 export async function getByProductCategoryId(req, res) {
-  // try {
-  //   const { productId } = req.params;
-  //   const product = await Product.findById(productId);
-  //   if (!product) {
-  //     return res.status(404).json({ message: "No Product with that ID" });
-  //   }
-  //   res.status(200).json(product);
-  // } catch (error) {
-  //   res.status(409).json({ message: error.message });
-  // }
+  try {
+    const { productCategoryId } = req.params;
+    const productCategory = await ProductCategory.findById(productCategoryId);
+    if (!productCategory) {
+      return res
+        .status(404)
+        .json({ message: "No ProductCategory with that ID" });
+    }
+    res.status(200).json(productCategory);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 }
 
 export async function update(req, res) {
