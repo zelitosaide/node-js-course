@@ -95,14 +95,16 @@ export async function update(req, res) {
 }
 
 export async function remove(req, res) {
-  // try {
-  //   const { productId } = req.params;
-  //   if (!mongoose.Types.ObjectId.isValid(productId)) {
-  //     return res.status(404).json({ message: "No Product with that ID" });
-  //   }
-  //   await Product.findByIdAndRemove(productId);
-  //   res.json({ _id: productId });
-  // } catch (error) {
-  //   res.status(409).json({ message: error.message });
-  // }
+  try {
+    const { productCategoryId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(productCategoryId)) {
+      return res
+        .status(404)
+        .json({ message: "No ProductCategory with that ID" });
+    }
+    await ProductCategory.findByIdAndRemove(productCategoryId);
+    res.json({ _id: productCategoryId });
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 }
