@@ -30,6 +30,7 @@ app.use("/boxItems", boxItems);
 app.use("/recipes", recipes);
 app.use("/recipeItems", recipeItems);
 app.use("/productCategories", productCategories);
+app.use("/boxCategories", boxCategories);
 
 app.get("/", function (_, res) {
   res.send("--- Welcome to Bookkeeper API :) --- Zelito");
