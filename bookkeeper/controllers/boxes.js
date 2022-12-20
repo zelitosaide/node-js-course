@@ -2,8 +2,40 @@ import mongoose from "mongoose";
 
 import { Box } from "../models/box.js";
 
+// export async function get(req, res) {
+//   let { page = 1, limit = 5, search } = req.query;
+//   const start = (Number(page) - 1) * Number(limit);
+//   const end = Number(page) * Number(limit);
+
+//   let boxes, total;
+
+//   try {
+//     total = await Box.countDocuments();
+
+//     if (search) {
+//       const name = new RegExp(search, "i");
+//       boxes = await Box.find({ name: name });
+//       return res.status(200).json({ items: boxes });
+//     } else {
+//       boxes = await Box.find().limit(Number(limit)).skip(start);
+//       return res.status(200).json({
+//         items: boxes,
+//         pageInfo: {
+//           resultsPerPage: Number(limit),
+//           totalResults: total,
+//           currentPage: Number(page),
+//           ...(end < total && { nextPage: Number(page) + 1 }),
+//           ...(start && end < total && { previousPage: Number(page) - 1 }),
+//         },
+//       });
+//     }
+//   } catch (error) {
+//     res.status(409).json({ message: error.message });
+//   }
+// }
+
 export async function get(req, res) {
-  let { page = 1, limit = 5, search } = req.query;
+  let { page = 1, limit = 5, search, category } = req.query;
   const start = (Number(page) - 1) * Number(limit);
   const end = Number(page) * Number(limit);
 
@@ -14,10 +46,8 @@ export async function get(req, res) {
 
     if (search) {
       const name = new RegExp(search, "i");
-      boxes = await Box.find({ name: name });
-      return res.status(200).json({ items: boxes });
-    } else {
-      boxes = await Box.find().limit(Number(limit)).skip(start);
+      total = await Box.countDocuments({ name: name });
+      boxes = await Box.find({ name: name }).limit(Number(limit)).skip(start);
       return res.status(200).json({
         items: boxes,
         pageInfo: {
@@ -29,6 +59,36 @@ export async function get(req, res) {
         },
       });
     }
+
+    if (category) {
+      const name = new RegExp(category, "i");
+      total = await Box.countDocuments({ category: name });
+      boxes = await Box.find({ category: name })
+        .limit(Number(limit))
+        .skip(start);
+      return res.status(200).json({
+        items: boxes,
+        pageInfo: {
+          resultsPerPage: Number(limit),
+          totalResults: total,
+          currentPage: Number(page),
+          ...(end < total && { nextPage: Number(page) + 1 }),
+          ...(start && end < total && { previousPage: Number(page) - 1 }),
+        },
+      });
+    }
+
+    boxes = await Box.find().limit(Number(limit)).skip(start);
+    return res.status(200).json({
+      items: boxes,
+      pageInfo: {
+        resultsPerPage: Number(limit),
+        totalResults: total,
+        currentPage: Number(page),
+        ...(end < total && { nextPage: Number(page) + 1 }),
+        ...(start && end < total && { previousPage: Number(page) - 1 }),
+      },
+    });
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
