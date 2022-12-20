@@ -11,6 +11,7 @@ import { router as recipes } from "./bookkeeper/routes/recipes.js";
 import { router as boxItems } from "./bookkeeper/routes/boxItems.js";
 import { router as recipeItems } from "./bookkeeper/routes/recipeItems.js";
 import { router as productCategories } from "./bookkeeper/routes/productCategories.js";
+import { router as boxCategories } from "./bookkeeper/routes/boxCategories.js";
 
 const app = express();
 
