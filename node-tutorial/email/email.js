@@ -13,10 +13,10 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: process.env.EMAIL,
-  to: "zelito.saide@uem.mz",
+  // to: "zelito.saide@uem.mz",
+  to: "zelito.saide@uem.mz, " + process.env.EMAIL,
   subject: "Sending Email using Node.js",
   text: "That was easy!",
-  html: "<h1>That was easy!</h1>",
 };
 
 transporter.sendMail(mailOptions, function (error, info) {
