@@ -16,6 +16,7 @@ const mailOptions = {
   to: "zelito.saide@uem.mz",
   subject: "Sending Email using Node.js",
   text: "That was easy!",
+  html: "<h1>That was easy!</h1>",
 };
 
 transporter.sendMail(mailOptions, function (error, info) {
