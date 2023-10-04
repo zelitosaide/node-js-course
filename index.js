@@ -20,7 +20,9 @@ const app = express();
 // dotenv.config();
 app.use(cors());
 
-const PORT = process.env.PORT || 5009;
+// const PORT = process.env.PORT || 5009;
+// const PORT = 5009;
+const PORT = 6000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 // app.use("/invoices", invoices);
